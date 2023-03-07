@@ -1,0 +1,10 @@
+---
+import Comment from "./Comment.astro";
+const { comments } = Astro.props;
+---
+
+<div>
+	{comments.map((comment: any) => {
+		return <Comment comment={comment}></Comment>
+	})}
+</div>

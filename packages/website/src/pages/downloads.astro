@@ -1,0 +1,28 @@
+---
+import { Sidebar } from "../components/Sidebar";
+import Layout from "../layouts/Layout.astro";
+import { getNewestDatasets } from "../lib/GetNewestDatasets";
+import DatasetDownloads from "../components/DatasetDownloads.svelte";
+import DownloadProgress from "../components/DownloadProgress.svelte";
+import { isAlreadyDownloaded } from "../lib/Datasets";
+import Integrations from "../components/Integrations.astro";
+import { GetLockFile } from "../lib/Lock";
+
+const datasets = await getNewestDatasets();
+// Get already installed datasets
+for (const dataset of datasets) {
+	let downloaded = isAlreadyDownloaded(dataset)
+	dataset.installed = downloaded;
+}
+
+const lockFile = GetLockFile()
+---
+
+<Layout title="Downloads">
+	<Sidebar client:only></Sidebar>
+	<main class="w-full border rounded-lg bg-white p-6">
+		<DownloadProgress lockFile={lockFile} client:only></DownloadProgress>
+		<Integrations></Integrations>
+		<DatasetDownloads datasets={datasets} client:only></DatasetDownloads>
+	</main>
+</Layout>

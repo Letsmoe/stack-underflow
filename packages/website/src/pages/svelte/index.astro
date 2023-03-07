@@ -1,0 +1,11 @@
+---
+import Card from "../../components/Card.svelte";
+import Layout from "../../layouts/Layout.astro"
+let content = (await Astro.glob("./docs/*.md"));
+---
+
+<Layout title="Svelte Documentation">
+	<main class="max-w-[1200px] mx-auto w-full grid grid-cols-3 gap-4">
+		{content.map(item => <Card title={item.frontmatter.title} link={"/svelte/" + item.frontmatter.slug} description={item.frontmatter.description} showSwitch={false} button="Learn More"></Card>)}
+	</main>
+</Layout>

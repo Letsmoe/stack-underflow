@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { query } from "../database";
+import PostView from "../components/PostView.svelte";
+import Pagination from "../components/Pagination.svelte";
+import { GetLockFile } from "../lib/Lock";
+import SearchBar from "../components/SearchBar.svelte";
+
+const q = Astro.cookies.get("q").value || "";
+var db = Astro.cookies.get("db").value || "";
+const offset = parseInt(Astro.url.searchParams.get("o") || "0");
+const limit = parseInt(Astro.url.searchParams.get("l") || "25");
+
+const lockFile = GetLockFile();
+
+if (lockFile && lockFile.downloads.length > 0 && !db) {
+	Astro.cookies.set("db", lockFile.downloads[0].database || "");
+	db = lockFile.downloads[0].database || "";
+}
+
+let result;
+let rows = []
+if (db) {
+	if (q) {
+		result = await query("SELECT * FROM posts WHERE title IS NOT NULL AND title LIKE $1 ORDER BY ViewCount DESC LIMIT $2 OFFSET $3", [
+			"%" + q + "%"
+		,limit, offset * limit], db);
+		rows = result.rows;
+	} else {
+		result = await query("SELECT * FROM posts WHERE title IS NOT NULL ORDER BY ViewCount DESC LIMIT $1 OFFSET $2", [limit, offset * limit], db);
+		rows = result.rows;
+	}
+}
+---
+
+<Layout title="StackUnderflow">
+	<SearchBar lockFile={lockFile} client:only></SearchBar>
+	{db && <ul>
+		<PostView posts={rows} db={db}></PostView>
+		<Pagination offset={offset} limit={limit} query={q}></Pagination>
+	</ul>}
+
+	{!db && <div>
+		<h1>Add a dataset</h1>
+		<p>It seems like you haven't added a dataset yet, navigate to the settings page and download one from the "datasets" tab.</p>
+		</div>}
+</Layout>

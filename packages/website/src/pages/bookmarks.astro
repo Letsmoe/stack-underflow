@@ -1,0 +1,14 @@
+---
+import BookmarkSection from "../components/BookmarkSection.svelte";
+import { Sidebar } from "../components/Sidebar";
+import Layout from "../layouts/Layout.astro";
+import { getBookmarks } from "../lib/Bookmarks";
+
+const bookmarks = getBookmarks();
+---
+
+
+<Layout title="Bookmarks">
+	<Sidebar client:only></Sidebar>
+	<BookmarkSection bookmarks={bookmarks}></BookmarkSection>
+</Layout>

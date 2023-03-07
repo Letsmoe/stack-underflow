@@ -1,0 +1,10 @@
+{
+	"contributes": {
+		"views": [{
+			"icon": "https://cdn-icons-png.flaticon.com/512/4436/4436481.png",
+			"id": "custom-webview",
+			"title": "My custom Webview"
+		}]
+	},
+	"main": "./extension"
+}

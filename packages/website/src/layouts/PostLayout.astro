@@ -1,0 +1,30 @@
+---
+import { Sidebar } from "../components/Sidebar";
+import { GetLockFile } from "../lib/Lock";
+import "../style/global.css";
+export interface Props {
+	title: string;
+}
+
+
+const q = Astro.url.searchParams.get("q");
+const { title } = Astro.props;
+const lockFile = GetLockFile()
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Sidebar client:only></Sidebar>
+		<main class="ml-[80px] p-8">
+			<slot />
+		</main>
+	</body>
+</html>

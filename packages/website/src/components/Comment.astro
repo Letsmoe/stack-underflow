@@ -1,0 +1,14 @@
+---
+const { comment } = Astro.props;
+import SvelteMarkdown from "svelte-markdown";
+---
+
+<div class="markdown-body pl-16 border-l-4 border-l-violet-400 bg-primary py-2 comment">
+	<SvelteMarkdown source={comment.text}></SvelteMarkdown>
+</div>
+
+<style>
+	div:not(:last-child) {
+		@apply border-b border-b-slate-300;
+	}
+</style>

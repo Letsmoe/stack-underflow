@@ -1,0 +1,25 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/routes.js",
+  "types": "./types/routes.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@rollup/plugin-alias": "^4.0.3",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "rollup-plugin-svelte": "^7.1.4",
+    "svelte-preprocess": "^5.0.1",
+    "tslib": "^2.5.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@tsconfig/svelte": "^3.0.0"
+  }
+}

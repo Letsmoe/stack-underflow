@@ -1,0 +1,1 @@
+{"version":3,"file":"db-map.d.ts","sourceRoot":"","sources":["../src/db-map.ts"],"names":[],"mappings":"AAAA,eAAO,MAAM,cAAc,EAAE;IAC5B,CAAC,GAAG,EAAE,MAAM,GAAG;QACd,QAAQ,EAAE,MAAM,EAAE,CAAC;QACnB,QAAQ,EAAE,MAAM,EAAE,CAAC;QACnB,WAAW,EAAE,MAAM,CAAA;KACnB,CAAA;CAyFD,CAAC"}

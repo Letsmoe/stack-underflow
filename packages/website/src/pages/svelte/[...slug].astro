@@ -1,0 +1,19 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const { slug } = Astro.params;
+const pages = await Astro.glob("./docs/*.md");
+
+const page = pages.find((p) => p.frontmatter.slug == slug);
+
+if (!page) {
+	return Astro.redirect("/")
+}
+---
+
+<Layout title={page.frontmatter.title}>
+	<main class="w-full max-w-[1200px] mx-auto">
+		<h1>{page.frontmatter.title}</h1>
+		<page.Content></page.Content>
+	</main>
+</Layout>
