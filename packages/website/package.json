@@ -1,7 +1,8 @@
 {
-	"name": "astro-template",
+	"name": "@underflow/core",
 	"type": "module",
 	"version": "0.0.1",
+	"main": "./src/lib/Extensions/index.ts",
 	"scripts": {
 		"dev": "concurrently \"astro dev\" \"pnpm run websocket\"",
 		"build": "astro build",
@@ -27,7 +28,7 @@
 		"express": "^4.18.2",
 		"js-cookie": "^3.0.1",
 		"node-fetch": "^3.3.0",
-		"pg": "^8.9.0",
+		"pg": "^8.10.0",
 		"pg-format": "^1.0.4",
 		"svelte": "^3.54.0",
 		"svelte-markdown": "^0.2.3",

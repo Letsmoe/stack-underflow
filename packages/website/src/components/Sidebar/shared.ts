@@ -1,16 +1,5 @@
 import { writable, Writable } from "svelte/store";
 import type { ViewLinks } from "./types";
-import { Home, Cube } from "../Icons/index";
+import { SidebarLinks } from "../../lib/Shared";
 
-export const ViewButtons: Writable<ViewLinks> = writable({
-	"home": {
-		icon: Home,
-		link: "/",
-		id: "home"
-	},
-	"docs": {
-		icon: Cube,
-		link: "/docs",
-		id: "docs"
-	}
-})
+export const ViewButtons: Writable<ViewLinks> = writable(SidebarLinks)

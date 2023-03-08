@@ -1,0 +1,17 @@
+---
+import { GetLockFile } from "@underflow/core/src/lib/Lock";
+import axios from "axios";
+import IndexContent from "./components/IndexContent.svelte";
+
+const response = await axios.get(
+	"https://frankfurt.kapeli.com/feeds/zzz/user_contributed/build/index.json"
+);
+const docsets = response.data.docsets;
+
+const lockFile = GetLockFile();
+---
+
+<div>
+	<h1>Documentation Downloader</h1>
+	<IndexContent client:load docsets={docsets} lockFile={lockFile}></IndexContent>
+</div>

@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { addMessage } from "../MessageHandler";
   import { WebSocketClient } from "../../lib/BrowserSocket";
   import type { Site } from "../../lib/types";
 	import Card from "../Card.svelte";
   import Modal from "../Modal.svelte";
-  import Popin from "../Popin.svelte";
   import ProgressBar from "../ProgressBar.svelte";
 	import { Tabs, TabList, TabPanel, Tab } from "../Tabs";
 
@@ -14,7 +14,7 @@
 	async function toggleInstalled(site: Site, active: boolean) {
 		if (!active) {
 			// Dataset was requested to be uninstalled.
-			popinMessage = `Uninstalling "${site.title}", this might take a while`;
+			addMessage({ text: `Uninstalling "${site.title}", this might take a while`, type: "info" });
 		} else {
 			const result = await fetch("/api/dataset", {
 				method: "POST",
@@ -23,15 +23,14 @@
 
 			const json = await result.json()
 			if (json.success == true) {
-				popinMessage = "Started download, you can see it in the downloads section now.";
+				addMessage({ text: "Started download, you can see it in the downloads section now.", type: "success" });
 			} else {
-				popinMessage = "Something went wrong!";
+				addMessage({ text: "Something went wrong!", type: "error" });
 			}
 		}
 	}
 
 	let openModal: (site: Site) => {};
-	let popinMessage: string = "";
 
 	const downloads: {
 		[key: string]: {
@@ -196,7 +195,6 @@
 		<h2>Downloads</h2>
 		<p>Manage all your downloads in one place</p>
 		<div class="grid grid-cols-3 py-4 gap-4">
-			<button on:click={() => popinMessage = "Hello tehre!"}>TEst</button>
 			{#each Object.entries(downloads) as [name, info]}
 				<Card button="Manage" description={info.site.description} title={info.site.title} icon={info.site.logo} link={""} showSwitch={false}>
 					{#if info.status == "started"}
@@ -212,4 +210,3 @@
 	</TabPanel>
 </Tabs>
 <Modal bind:open={openModal}></Modal>
-<Popin message={popinMessage}></Popin>

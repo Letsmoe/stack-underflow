@@ -1,0 +1,24 @@
+---
+import { Card } from "@underflow/ui";
+const { pkg } = Astro.props;
+
+let content = await Astro.glob("./**/*.md");
+
+const inPackage = content.filter(item => {
+	return item.file.includes(pkg);
+})
+---
+
+<div class="grid grid-cols-3 gap-4">
+	{
+		inPackage.map((item: any) => (
+			item.frontmatter ? <Card
+				title={item.frontmatter.title}
+				link={"/dock/" + pkg + "/" + item.frontmatter.slug}
+				description={item.frontmatter.description}
+				showSwitch={false}
+				button="Learn More"
+			/> : <item.default />
+		))
+	}
+</div>

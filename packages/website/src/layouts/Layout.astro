@@ -1,22 +1,15 @@
 ---
+import { loadExtensions } from "../lib/loadExtensions.js";
+await loadExtensions();
 import MessageHandler from "../components/MessageHandler/Handler.svelte";
 import { Sidebar } from "../components/Sidebar";
-import { GetLockFile } from "../lib/Lock";
 import "../style/global.css";
 export interface Props {
 	title: string;
 }
 
-
-const q = Astro.url.searchParams.get("q");
 const { title } = Astro.props;
-const lockFile = GetLockFile();
 ---
-
-<script>
-	import { loadExtension } from "../lib/loadExtension";
-	loadExtension()
-</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +21,7 @@ const lockFile = GetLockFile();
 		<title>{title}</title>
 	</head>
 	<body>
-		<Sidebar client:only></Sidebar>
+		<Sidebar></Sidebar>
 		<main class="ml-[80px] p-8">
 			<slot />
 		</main>

@@ -1,0 +1,18 @@
+---
+const { pkg, slug } = Astro.props;
+
+const pages = await Astro.glob("./**/*.{html,md}");
+
+const p = pages.find((p: any) => {
+	if (p.frontmatter && p.frontmatter.slug == slug) {
+		return true;
+	}
+});
+
+if (!p) {
+	return Astro.redirect("/404")
+}
+---
+
+<h1>{p.frontmatter.title}</h1>
+<p.Content></p.Content>

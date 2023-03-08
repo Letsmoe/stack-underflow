@@ -1,7 +1,7 @@
 ---
 import { query } from "../../database";
 import CommentSection from "../../components/CommentSection.astro";
-import PostLayout from "../../layouts/PostLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 import BookmarkButton from "../../components/BookmarkButton.svelte";
 import { isBookmarked } from "../../lib/Bookmarks";
 
@@ -41,7 +41,7 @@ const comments = row.all_comments.filter((x: any) => x);
 const bookmarked = isBookmarked(parseInt(id as string));
 ---
 
-<PostLayout title="Post">
+<Layout title="Post">
 	<div class="max-w-[1200px] mx-auto flex flex-col gap-4">
 		<div
 			class="border rounded-lg p-6 border-dark-blue markdown-body bg-secondary">
@@ -92,4 +92,4 @@ const bookmarked = isBookmarked(parseInt(id as string));
 		pageId={id}
 		client:load
 	/>
-</PostLayout>
+</Layout>
